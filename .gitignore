@@ -1,0 +1,4 @@
+*.sw*
+.idea/
+__pycache__/
+
