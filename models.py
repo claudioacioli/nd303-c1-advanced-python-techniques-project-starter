@@ -32,7 +32,6 @@ class NearEarthObject:
     initialized to an empty collection, but eventually populated in the
     `NEODatabase` constructor.
     """
-    # TODO: How can you, and should you, change the arguments to this constructor?
     # If you make changes, be sure to update the comments in this file.
     def __init__(self, **info):
         """Create a new `NearEarthObject`.
@@ -44,10 +43,20 @@ class NearEarthObject:
         # You should coerce these values to their appropriate data type and
         # handle any edge cases, such as a empty name being represented by `None`
         # and a missing diameter being represented by `float('nan')`.
-        self.designation = ''
+
+        self.designation = '' 
+        if 'designation' in info:
+            self.designation = info['designation']
+
         self.name = None
+        if 'name' in info and len(info['name']):
+            self.name = info['name']
+
         self.diameter = float('nan')
-        self.hazardous = False
+        if 'diameter' in info and info['diameter'] != '':
+            self.diameter = float(info['diameter'])
+
+        self.hazardous = True if 'hazardous' in info and info['hazardous'] == 'Y' else False
 
         # Create an empty initial collection of linked approaches.
         self.approaches = []
